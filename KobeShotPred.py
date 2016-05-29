@@ -265,17 +265,17 @@ test.drop('game_id', inplace=True, axis=1)
 test.drop('shot_id', inplace=True, axis=1)
 
 
-#train_X['secondsFromPeriodEnd'] = 60*train_X['minutes_remaining']+train_X['seconds_remaining']
-#xx = 60*(11-train_X['minutes_remaining'])+(60-train_X['seconds_remaining'])
-#train_X['secondsFromPeriodStart'] = xx
-#xx = (train_X['period'] <= 4).astype(int)*(train_X['period']-1)*12*60 + (train_X['period'] > 4).astype(int)*((train_X['period']-4)*5*60 + 3*12*60) + train_X['secondsFromPeriodStart']
-#train_X['secondsFromGameStart'] = xx
-#
-#test['secondsFromPeriodEnd'] = 60*test['minutes_remaining']+test['seconds_remaining']
-#xx = 60*(11-test['minutes_remaining'])+(60-test['seconds_remaining'])
-#test['secondsFromPeriodStart'] = xx
-#xx = (test['period'] <= 4).astype(int)*(test['period']-1)*12*60 + (test['period'] > 4).astype(int)*((test['period']-4)*5*60 + 3*12*60) + test['secondsFromPeriodStart']
-#test['secondsFromGameStart'] = xx
+train_X['secondsFromPeriodEnd'] = 60*train_X['minutes_remaining']+train_X['seconds_remaining']
+xx = 60*(11-train_X['minutes_remaining'])+(60-train_X['seconds_remaining'])
+train_X['secondsFromPeriodStart'] = xx
+xx = (train_X['period'] <= 4).astype(int)*(train_X['period']-1)*12*60 + (train_X['period'] > 4).astype(int)*((train_X['period']-4)*5*60 + 3*12*60) + train_X['secondsFromPeriodStart']
+train_X['secondsFromGameStart'] = xx
+
+test['secondsFromPeriodEnd'] = 60*test['minutes_remaining']+test['seconds_remaining']
+xx = 60*(11-test['minutes_remaining'])+(60-test['seconds_remaining'])
+test['secondsFromPeriodStart'] = xx
+xx = (test['period'] <= 4).astype(int)*(test['period']-1)*12*60 + (test['period'] > 4).astype(int)*((test['period']-4)*5*60 + 3*12*60) + test['secondsFromPeriodStart']
+test['secondsFromGameStart'] = xx
 
 
 "Categorical Variable has to be changed to numerical in order to use xgboost"
@@ -303,7 +303,7 @@ df.plot(kind='barh', x='feature', y='fscore', legend=False, figsize=(6, 10))
 test_preds = gbdt.predict(dtest)
 
 submission = pd.DataFrame({"shot_id": testID, "shot_made_flag": test_preds})
-submission.to_csv("FirstSubmission.csv", index=False)
+submission.to_csv("SecondSubmission.csv", index=False)
 
 
 
